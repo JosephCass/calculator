@@ -33,6 +33,26 @@ body {
   border: 0.15rem solid black;
   border-radius: 0.5rem;
   margin: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 4fr;
+}
+
+.display-equation {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1rem;
+  font-family: sans-serif;
+}
+
+.display-number {
+  font-size: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1rem;
+  font-family: sans-serif;
 }
 
 .calculator-btns {
@@ -44,8 +64,7 @@ body {
   margin-top: 0;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 4fr;
-  gap: 1rem;
+  grid-template-rows: 4fr;
 }
 
 .btn {
@@ -60,10 +79,8 @@ body {
   cursor: pointer;
 }
 
-.erase-btns {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+.span {
+  grid-column: span 2;
 }
 
 .clear-btn {
