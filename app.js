@@ -9,6 +9,7 @@ let currOperator;
 let secondNum;
 let secondSide;
 let annex;
+let decimal;
 
 function add(a, b) {
   return a + b;
@@ -48,10 +49,17 @@ function handelInt(btn) {
   }
 }
 
+function handelDecimal(btn) {
+  if (btn.classList.contains("btn-decimal")) {
+    displayNumber.textContent += btn.value;
+  }
+}
+
 //Functionality for when an operator is clicked
 function handelOperator(btn) {
   if (btn.classList.contains("btn-operator")) {
-    firstNum = parseInt(displayNumber.textContent);
+    firstNum = parseFloat(displayNumber.textContent);
+    console.log(firstNum);
     currOperator = btn.value;
   }
 }
@@ -63,7 +71,7 @@ function handelEqual(btn) {
       displayNumber.textContent = "ERROR";
       return;
     }
-    secondNum = parseInt(displayNumber.textContent);
+    secondNum = parseFloat(displayNumber.textContent);
     displayNumber.textContent = operate(currOperator, firstNum, secondNum);
     displayEquation.textContent = `${firstNum ? firstNum : ""} ${
       currOperator ? currOperator : ""
@@ -81,6 +89,9 @@ allBtns.forEach(function (current) {
     handelInt(current);
     handelOperator(current);
     handelEqual(current);
+    if (!displayNumber.textContent.includes(".")) {
+      handelDecimal(current);
+    }
     displayEquation.textContent = `${firstNum ? firstNum : ""} ${
       currOperator ? currOperator : ""
     } ${secondNum ? secondNum : ""}`;
