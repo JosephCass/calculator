@@ -8,6 +8,7 @@ let firstNum;
 let currOperator;
 let secondNum;
 let secondSide;
+let annex;
 
 function add(a, b) {
   return a + b;
@@ -37,9 +38,10 @@ function handelInt(btn) {
   if (btn.classList.contains("btn-int")) {
     if (displayNumber.textContent === "0") displayNumber.textContent = "";
     if (currOperator) {
-      if (!secondSide) displayNumber.textContent = "";
+      if (!secondSide || annex) displayNumber.textContent = "";
       displayNumber.textContent += btn.value;
       secondSide = true;
+      annex = false;
     } else {
       displayNumber.textContent += btn.value;
     }
@@ -57,11 +59,16 @@ function handelOperator(btn) {
 //Functionality for when the equal sign button is clicked
 function handelEqual(btn) {
   if (btn.classList.contains("btn-equal")) {
+    if (currOperator === "/" && displayNumber.textContent === "0") {
+      displayNumber.textContent = "ERROR";
+      return;
+    }
     secondNum = parseInt(displayNumber.textContent);
     displayNumber.textContent = operate(currOperator, firstNum, secondNum);
     displayEquation.textContent = `${firstNum ? firstNum : ""} ${
       currOperator ? currOperator : ""
     } ${secondNum ? secondNum : ""}`;
+    annex = true;
     // currOperator = "";
     // firstNum = null;
     // secondNum = null;
@@ -88,6 +95,7 @@ clearBtn.addEventListener("click", function () {
   firstNum = null;
   secondNum = null;
   secondSide = false;
+  annex = false;
 });
 
 //Listens for delete btn click
@@ -96,5 +104,7 @@ delBtn.addEventListener("click", function () {
 });
 
 //TODO
-//Make Calculator Work With Decimals
-//Display Equation On Top As Going
+
+// Make Calculator Work With Decimals and not be allowed multiple .
+// Change Color of Buttons on hover and click
+// Add Keyboard Support
